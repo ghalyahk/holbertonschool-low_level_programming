@@ -1,0 +1,20 @@
+#!/bin/bash
+# Compile the C file without linking
+
+# Check if CFILE is set
+if [ -z "$CFILE" ]; then
+  echo "CFILE variable is not set"
+  exit 1
+fi
+
+# Check if the file exists
+if [ ! -f "$CFILE" ]; then
+  echo "File $CFILE does not exist"
+  exit 1
+fi
+
+# Replace .c extension with .o for output file
+outfile="${CFILE%.c}.o"
+
+# Compile without linking
+gcc -c "$CFILE" -o "$outfile"
