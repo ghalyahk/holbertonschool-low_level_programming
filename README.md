@@ -1,3 +1,18 @@
-# Preprocessor Project
+# variables_if_else_while Directory
 
-This project contains solutions for the Preprocessor task in C programming.
+## Description
+
+This directory contains C programs demonstrating the use of variables, conditional statements, and loops.
+
+## File: 9-print_comb.c
+
+This program prints all single-digit numbers from 0 to 9, separated by a comma and a space.  
+The numbers are printed in ascending order using only the `putchar` function.  
+No other output functions like `printf` or `puts` are allowed.  
+The code follows coding standards and uses only `int` type variables.
+
+### How to compile
+
+```bash
+gcc -Wall -pedantic -Werror -Wextra -std=gnu89 9-print_comb.c -o 9-print_comb
+o
