@@ -1,12 +1,12 @@
-#include <unistd.h>
+int _putchar(char c); // إعلان الدالة
 
-/**
- * _putchar - يطبع حرف على الشاشة باستخدام دالة write
- * @c: الحرف المراد طباعته
- *
- * Return: عدد الأحرف المكتوبة أو -1 في حالة الخطأ
- */
-int _putchar(char c)
+int main(void)
 {
-    return write(1, &c, 1);
+    _putchar('H');
+    _putchar('e');
+    _putchar('l');
+    _putchar('l');
+    _putchar('o');
+    _putchar('\n');
+    return 0;
 }
