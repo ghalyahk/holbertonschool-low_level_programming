@@ -1,15 +1,7 @@
-#include "main.h"
+#ifndef MAIN_H
+#define MAIN_H
 
-int main(void)
-{
-    char *str = "_putchar\n";
-    int i = 0;
+void print_to_98(int n);
+int _putchar(char c);
 
-    while (str[i])
-    {
-        _putchar(str[i]);
-        i++;
-    }
-
-    return 0;
-}
+#endif
