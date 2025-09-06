@@ -1,7 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-int _atoi(char *s);
 void reset_to_98(int *n);
 
-#endif /* MAIN_H */
+#endif

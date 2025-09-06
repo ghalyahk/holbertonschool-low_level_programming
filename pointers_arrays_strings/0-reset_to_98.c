@@ -3,19 +3,9 @@
 /**
  * reset_to_98 - Takes a pointer to an int and updates
  *               the value it points to to 98.
-<<<<<<< HEAD
  * @n: Pointer to an int.
  */
 void reset_to_98(int *n)
 {
     *n = 98;
-=======
- * @n: Pointer to an int to be updated.
- *
- * Return: Nothing.
- */
-void reset_to_98(int *n)
-{
-	*n = 98;
->>>>>>> ec25b4ac11a5378bc560fc6d8748d6799381c4f9
 }
