@@ -2,14 +2,16 @@
 
 /**
  * main - prints the number of arguments passed into it
- * @argc: argument count
- * @argv: argument vector (not used here)
+ * @argc: number of arguments
+ * @argv: array of arguments (not used)
  *
- * Return: 0 (success)
+ * Return: Always 0
  */
 int main(int argc, char *argv[])
 {
-    (void)argv; /* لتجنب تحذيرات unused variable */
-    printf("%d\n", argc - 1);
-    return (0);
+	(void)argv; /* avoid unused variable warning */
+
+	printf("%d\n", argc - 1);
+
+	return (0);
 }
