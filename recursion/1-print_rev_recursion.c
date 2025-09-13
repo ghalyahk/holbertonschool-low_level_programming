@@ -6,9 +6,9 @@
  */
 void _print_rev_recursion(char *s)
 {
-    if (*s == '\0')  /* قاعدة التوقف: نهاية السلسلة */
-        return;
+	if (*s == '\0')
+		return;
 
-    _print_rev_recursion(s + 1);  /* نداء ذاتي على الحرف التالي */
-    _putchar(*s);  /* طباعة الحرف بعد العودة من النداء الذاتي */
+	_print_rev_recursion(s + 1);
+	_putchar(*s);
 }
