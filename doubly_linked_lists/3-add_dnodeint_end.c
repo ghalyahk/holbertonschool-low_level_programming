@@ -3,13 +3,14 @@
 
 /**
  * add_dnodeint_end - adds a new node at the end of a dlistint_t list
- * @head: pointer to pointer to head
- * @n: value to store in the new node
- * Return: address of the new node, or NULL if it fails
+ * @head: pointer to the head of the list
+ * @n: data to insert in the new node
+ *
+ * Return: address of the new node, or NULL if it failed
  */
-dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
+dlistint_t *add_dnodeint_end(dlistint_t **head, int n)
 {
-	dlistint_t *new, *tmp;
+	dlistint_t *new, *temp;
 
 	new = malloc(sizeof(dlistint_t));
 	if (!new)
@@ -18,19 +19,19 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 	new->n = n;
 	new->next = NULL;
 
-	if (!*head)
+	if (*head == NULL)
 	{
 		new->prev = NULL;
 		*head = new;
 		return (new);
 	}
 
-	tmp = *head;
-	while (tmp->next)
-		tmp = tmp->next;
+	temp = *head;
+	while (temp->next)
+		temp = temp->next;
 
-	tmp->next = new;
-	new->prev = tmp;
+	temp->next = new;
+	new->prev = temp;
 
 	return (new);
 }
