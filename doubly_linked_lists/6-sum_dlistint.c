@@ -1,19 +1,20 @@
 #include "lists.h"
 
 /**
- * sum_dlistint - returns the sum of all the data (n) of a dlistint_t list
- * @head: pointer to the head of the list
+ * sum_dlistint - returns sum of all data (n)
+ * @head: pointer to head
  *
- * Return: sum of all nodes, 0 if list is empty
+ * Return: sum, 0 if empty
  */
 int sum_dlistint(dlistint_t *head)
 {
 	int sum = 0;
+	dlistint_t *current = head;
 
-	while (head)
+	while (current)
 	{
-		sum += head->n;
-		head = head->next;
+		sum += current->n;
+		current = current->next;
 	}
 
 	return (sum);
