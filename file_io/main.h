@@ -2,8 +2,9 @@
 #define MAIN_H
 
 #include <stddef.h>
-#include <unistd.h> /* لـ ssize_t */
+#include <unistd.h> /* ssize_t */
 
 ssize_t read_textfile(const char *filename, size_t letters);
 
 #endif /* MAIN_H */
+
