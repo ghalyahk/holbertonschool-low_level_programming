@@ -1,18 +1,20 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
-
-#define BUF_SIZE 1024
+#include <unistd.h>
 
 /**
- * main - copy file content
+ * main - copies the content of a file to another file
+ * @ac: argument count
+ * @av: argument vector
+ * Return: 0 on success, exits with code on failure
  */
 int main(int ac, char **av)
 {
-    int fd_from, fd_to, r, w;
-    char buffer[BUF_SIZE];
+    int fd_from, fd_to;
+    ssize_t r, w;
+    char buffer[1024];
 
     if (ac != 3)
     {
@@ -31,18 +33,21 @@ int main(int ac, char **av)
     if (fd_to == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-        close(fd_from);
+        if (close(fd_from) == -1)
+            dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
         exit(99);
     }
 
-    while ((r = read(fd_from, buffer, BUF_SIZE)) > 0)
+    while ((r = read(fd_from, buffer, 1024)) > 0)
     {
         w = write(fd_to, buffer, r);
         if (w != r)
         {
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-            close(fd_from);
-            close(fd_to);
+            if (close(fd_from) == -1)
+                dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
+            if (close(fd_to) == -1)
+                dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
             exit(99);
         }
     }
@@ -50,8 +55,10 @@ int main(int ac, char **av)
     if (r == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
-        close(fd_from);
-        close(fd_to);
+        if (close(fd_from) == -1)
+            dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
+        if (close(fd_to) == -1)
+            dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
         exit(98);
     }
 
