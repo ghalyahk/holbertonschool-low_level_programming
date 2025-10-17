@@ -2,10 +2,10 @@
 #define MAIN_H
 
 /**
- * struct dog - Structure for a dog
- * @name: Name of the dog
- * @age: Age of the dog
- * @owner: Owner of the dog
+ * struct dog - structure for a dog
+ * @name: name of the dog
+ * @age: age of the dog
+ * @owner: owner of the dog
  */
 typedef struct dog
 {
