@@ -1,15 +1,14 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 /**
  * main - copies the content of a file to another file
  * @ac: argument count
  * @av: argument vector
- *
- * Return: 0 on success, exits with codes 97-100 on failure
+ * Return: 0 on success, exits with code on failure
  */
 int main(int ac, char **av)
 {
@@ -30,7 +29,7 @@ int main(int ac, char **av)
         exit(98);
     }
 
-    fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+    fd_to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
     if (fd_to == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
