@@ -1,22 +1,23 @@
 #include <stdlib.h>
-#include "dog.h"
+#include "main.h"
 
 /**
- * _strcpy - copies a string from src to dest
+ * _strcpy - copies string from src to dest
  * @dest: destination buffer
  * @src: source string
  * Return: pointer to dest
  */
 char *_strcpy(char *dest, char *src)
 {
-    int i = 0;
-    while (src[i])
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return dest;
+	int i = 0;
+
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 /**
@@ -26,25 +27,23 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strdup(char *str)
 {
-    char *copy;
-    int len = 0, i;
+	char *copy;
+	int len = 0, i;
 
-    if (str == NULL)
-        return NULL;
+	if (str == NULL)
+		return (NULL);
 
-    /* حساب الطول */
-    while (str[len])
-        len++;
+	while (str[len])
+		len++;
 
-    copy = malloc(len + 1);
-    if (copy == NULL)
-        return NULL;
+	copy = malloc(len + 1);
+	if (copy == NULL)
+		return (NULL);
 
-    /* نسخ المحتوى */
-    for (i = 0; i <= len; i++)
-        copy[i] = str[i];
+	for (i = 0; i <= len; i++)
+		copy[i] = str[i];
 
-    return copy;
+	return (copy);
 }
 
 /**
@@ -56,32 +55,32 @@ char *_strdup(char *str)
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-    dog_t *dog;
+	dog_t *dog;
 
-    if (name == NULL || owner == NULL)
-        return NULL;
+	if (name == NULL || owner == NULL)
+		return (NULL);
 
-    dog = malloc(sizeof(dog_t));
-    if (!dog)
-        return NULL;
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
+		return (NULL);
 
-    dog->name = _strdup(name);
-    if (!dog->name)
-    {
-        free(dog);
-        return NULL;
-    }
+	dog->name = _strdup(name);
+	if (dog->name == NULL)
+	{
+		free(dog);
+		return (NULL);
+	}
 
-    dog->owner = _strdup(owner);
-    if (!dog->owner)
-    {
-        free(dog->name);
-        free(dog);
-        return NULL;
-    }
+	dog->owner = _strdup(owner);
+	if (dog->owner == NULL)
+	{
+		free(dog->name);
+		free(dog);
+		return (NULL);
+	}
 
-    dog->age = age;
+	dog->age = age;
 
-    return dog;
+	return (dog);
 }
 
