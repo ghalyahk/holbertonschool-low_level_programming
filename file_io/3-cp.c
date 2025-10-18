@@ -4,11 +4,11 @@
 #include <unistd.h>
 #include <errno.h>
 
-#define BUF 1024
+#define BUF_SIZE 1024
 
 /**
- * close_or_die - close fd or exit 100
- * @fd: file descriptor
+ * close_or_die - closes a file descriptor or exits with code 100
+ * @fd: file descriptor to close
  */
 static void close_or_die(int fd)
 {
@@ -20,12 +20,12 @@ static void close_or_die(int fd)
 }
 
 /**
- * read_retry - read with EINTR retry; exit 98 on error
- * @fd: src fd
- * @buf: buffer
- * @n: bytes to read
- * @name: src filename (for message)
- * Return: bytes read (>= 0)
+ * read_retry - reads from a file descriptor, retrying if interrupted
+ * @fd: source file descriptor
+ * @buf: buffer to store read data
+ * @n: number of bytes to read
+ * @name: filename for error messages
+ * Return: number of bytes read (>= 0)
  */
 static ssize_t read_retry(int fd, char *buf, size_t n, const char *name)
 {
@@ -37,20 +37,18 @@ static ssize_t read_retry(int fd, char *buf, size_t n, const char *name)
 
 	if (r == -1)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't read from file %s\n", name);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", name);
 		exit(98);
 	}
 	return (r);
 }
 
 /**
- * write_all - write all n bytes (handles short writes/EINTR),
- * exit 99 on error
- * @fd: dst fd
- * @name: dst filename (for message)
- * @buf: data
- * @n: bytes to write
+ * write_all - writes all bytes, handling short writes and EINTR
+ * @fd: destination file descriptor
+ * @name: destination filename for error messages
+ * @buf: data buffer
+ * @n: number of bytes to write
  */
 static void write_all(int fd, const char *name, const char *buf, ssize_t n)
 {
@@ -64,8 +62,7 @@ static void write_all(int fd, const char *name, const char *buf, ssize_t n)
 
 		if (w == -1)
 		{
-			dprintf(STDERR_FILENO,
-				"Error: Can't write to %s\n", name);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", name);
 			exit(99);
 		}
 		off += w;
@@ -73,16 +70,16 @@ static void write_all(int fd, const char *name, const char *buf, ssize_t n)
 }
 
 /**
- * main - copy file_from to file_to (1 KiB buffer)
- * @ac: argc
- * @av: argv
+ * main - copies content from file_from to file_to
+ * @ac: argument count
+ * @av: argument vector
  * Return: 0 on success
  */
 int main(int ac, char **av)
 {
 	int f_from, f_to;
 	ssize_t r;
-	char buf[BUF];
+	char buf[BUF_SIZE];
 
 	if (ac != 3)
 	{
@@ -93,21 +90,19 @@ int main(int ac, char **av)
 	f_from = open(av[1], O_RDONLY);
 	if (f_from == -1)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't read from file %s\n", av[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
 		exit(98);
 	}
 
 	f_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (f_to == -1)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't write to %s\n", av[2]);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
 		close_or_die(f_from);
 		exit(99);
 	}
 
-	while ((r = read_retry(f_from, buf, BUF, av[1])) > 0)
+	while ((r = read_retry(f_from, buf, BUF_SIZE, av[1])) > 0)
 		write_all(f_to, av[2], buf, r);
 
 	close_or_die(f_from);
