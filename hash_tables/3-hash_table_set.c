@@ -1,6 +1,12 @@
 #include "hash_tables.h"
 
-/* Create a new node */
+/**
+ * create_node - Creates a new hash node with key and value
+ * @key: The key to store
+ * @value: The value associated with the key
+ *
+ * Return: Pointer to the new node, or NULL if it fails
+ */
 hash_node_t *create_node(const char *key, const char *value)
 {
 	hash_node_t *node = malloc(sizeof(hash_node_t));
@@ -27,7 +33,13 @@ hash_node_t *create_node(const char *key, const char *value)
 	return (node);
 }
 
-/* Update node value if key exists */
+/**
+ * update_node_value - Updates the value of a hash node
+ * @node: The node to update
+ * @value: The new value
+ *
+ * Return: 1 on success, 0 on failure
+ */
 int update_node_value(hash_node_t *node, const char *value)
 {
 	if (!node)
@@ -41,7 +53,14 @@ int update_node_value(hash_node_t *node, const char *value)
 	return (1);
 }
 
-/* Add or update element in the hash table */
+/**
+ * hash_table_set - Adds or updates an element in the hash table
+ * @ht: The hash table
+ * @key: The key, cannot be empty
+ * @value: The value associated with the key, must be duplicated
+ *
+ * Return: 1 if it succeeded, 0 otherwise
+ */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
