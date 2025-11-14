@@ -3,7 +3,7 @@
 /**
  * main - prints all possible combinations of two two-digit numbers
  *
- * Description: prints numbers from 00 01 to 98 99, 
+ * Description: prints numbers from 00 01 to 98 99,
  * separated by comma and space, using only putchar.
  *
  * Return: 0 on success
